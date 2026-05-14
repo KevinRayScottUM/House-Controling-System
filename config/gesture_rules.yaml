@@ -1,0 +1,12 @@
+left_room_map:
+  left_1: room_1
+  left_2: room_2
+  left_3: room_3
+right_action_map:
+  right_open: on
+  right_fist: off
+filter:
+  confidence_threshold: 0.65
+  stable_frames: 3
+  selection_timeout_sec: 3.0
+  command_cooldown_sec: 1.2

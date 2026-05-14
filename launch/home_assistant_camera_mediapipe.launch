@@ -1,0 +1,29 @@
+<launch>
+  <arg name="camera_source" default="0"/>
+  <arg name="image_topic" default="/usb_cam/image_raw"/>
+  <arg name="show_camera_debug" default="false"/>
+  <arg name="show_gesture_debug" default="true"/>
+  <arg name="mirror_image" default="true"/>
+  <arg name="swap_hands" default="false"/>
+  <arg name="enable_tts" default="false"/>
+  <include file="$(find local_home_assistant)/launch/home_assistant_base.launch">
+    <arg name="enable_manual_control" value="true"/>
+    <arg name="enable_tts" value="$(arg enable_tts)"/>
+  </include>
+  <node pkg="local_home_assistant" type="camera_stream_node.py" name="camera_stream_node" output="screen">
+    <param name="camera_source" value="$(arg camera_source)"/>
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="fps" value="15"/>
+    <param name="width" value="640"/>
+    <param name="height" value="480"/>
+    <param name="show_debug" value="$(arg show_camera_debug)"/>
+  </node>
+  <node pkg="local_home_assistant" type="mediapipe_gesture_node.py" name="mediapipe_gesture_node" output="screen">
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="show_debug" value="$(arg show_gesture_debug)"/>
+    <param name="mirror_image" value="$(arg mirror_image)"/>
+    <param name="swap_hands" value="$(arg swap_hands)"/>
+    <param name="process_every_n" value="2"/>
+  </node>
+  <node pkg="local_home_assistant" type="gesture_interpreter_node.py" name="gesture_interpreter" output="screen"/>
+</launch>

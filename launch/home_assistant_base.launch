@@ -1,0 +1,13 @@
+<launch>
+  <arg name="enable_manual_control" default="true"/>
+  <arg name="enable_tts" default="false"/>
+  <node pkg="local_home_assistant" type="state_manager_node.py" name="home_state_manager" output="screen">
+    <param name="rooms_yaml" value="$(find local_home_assistant)/config/rooms.yaml"/>
+  </node>
+  <node pkg="local_home_assistant" type="audio_feedback_node.py" name="audio_feedback_node" output="screen">
+    <param name="enable_tts" value="$(arg enable_tts)"/>
+  </node>
+  <node pkg="local_home_assistant" type="home_visualizer_node.py" name="home_visualizer_node" output="screen">
+    <param name="enable_manual_control" value="$(arg enable_manual_control)"/>
+  </node>
+</launch>

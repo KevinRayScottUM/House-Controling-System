@@ -1,0 +1,16 @@
+<launch>
+  <arg name="enable_tts" default="false"/>
+  <include file="$(find local_home_assistant)/launch/home_assistant_base.launch">
+    <arg name="enable_manual_control" value="true"/>
+    <arg name="enable_tts" value="$(arg enable_tts)"/>
+  </include>
+  <node pkg="local_home_assistant" type="gesture_interpreter_node.py" name="gesture_interpreter" output="screen">
+    <param name="confidence_threshold" value="0.65"/>
+    <param name="stable_frames" value="3"/>
+    <param name="selection_timeout_sec" value="3.0"/>
+    <param name="command_cooldown_sec" value="1.2"/>
+  </node>
+  <node pkg="local_home_assistant" type="keyboard_gesture_mock_node.py" name="keyboard_gesture_mock" output="screen">
+    <param name="repeat" value="3"/>
+  </node>
+</launch>

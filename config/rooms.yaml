@@ -1,0 +1,22 @@
+rooms:
+  room_1:
+    label: "Room 1 | Bedroom"
+    devices:
+      light: false
+      fan: false
+      ac: false
+      door: false
+  room_2:
+    label: "Room 2 | Living Room"
+    devices:
+      light: false
+      fan: false
+      curtain: false
+      door: false
+  room_3:
+    label: "Room 3 | Toilet"
+    devices:
+      light: false
+      exhaust: false
+      heater: false
+      door: false

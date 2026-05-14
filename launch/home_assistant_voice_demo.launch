@@ -1,0 +1,8 @@
+<launch>
+  <arg name="enable_tts" default="false"/>
+  <include file="$(find local_home_assistant)/launch/home_assistant_base.launch">
+    <arg name="enable_manual_control" value="true"/>
+    <arg name="enable_tts" value="$(arg enable_tts)"/>
+  </include>
+  <node pkg="local_home_assistant" type="voice_command_node.py" name="voice_command_node" output="screen"/>
+</launch>
